@@ -9,11 +9,17 @@ import axios from 'axios';
 import {
     Card,
     CardHeader,
-    CardTitle,
     CardContent,
     CardFooter,
     CardDescription
 } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -97,7 +103,7 @@ export default function RegisterForm() {
 
     return (
         <div className="flex items-center justify-center bg-background">
-                <Card className="w-full p-6 pt-1 pb-2 bg-card-border/50 border-none">
+                <Card className="w-full p-6 pt-1 pb-2 bg-card-border/50 border-none shadow-none">
                     <CardHeader>
                         <CardDescription className="text-center mb-6">Please fill in the details to register.</CardDescription>
                     </CardHeader>

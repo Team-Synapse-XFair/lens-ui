@@ -11,7 +11,7 @@ export default function LoadingWrapper({ children }) {
     }, []);
 
     return (
-        <div className={`transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} style={{ minHeight: "100vh" }}>
+        <div className={`transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} style={{ height: "calc(100vh - var(--header-height))" }}>
             {children}
         </div>
     );

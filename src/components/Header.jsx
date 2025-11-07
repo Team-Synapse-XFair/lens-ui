@@ -55,7 +55,7 @@ export default function Header() {
           </Link>
 
           <Button asChild className="ml-2">
-            <Link href="/submit">Submit Report</Link>
+            <Link href="/report">Submit Report</Link>
           </Button>
         </div>
 

@@ -63,7 +63,7 @@ export default function LoginForm({ redirectTo = '/' }) {
 
     return (
         <div className="flex items-center justify-center bg-background">
-            <Card className="w-full p-6 pt-1 bg-card-border/50 border-none">
+            <Card className="w-full p-6 pt-1 bg-card-border/50 border-none shadow-none">
                 <CardHeader>
                     <CardDescription className="text-center">Enter your credentials to continue</CardDescription>
                 </CardHeader>
