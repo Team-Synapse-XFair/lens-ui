@@ -13,20 +13,20 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 
-export default function LocationPickerDialogue({ onSelect }) {
+export default function LocationPickerDialogue({ onSelect, openState }) {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(openState);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
             async function fetchLocations() {
-                setLoading(true);
                 if (!query.trim()) {
                     setResults([]);
                     return;
                 }
+                setLoading(true);
                 const res = await fetch(
                     `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json`
                 );
@@ -43,7 +43,7 @@ export default function LocationPickerDialogue({ onSelect }) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button>Pick Location</Button>
+                <Button variant='secondary'>Pick Location</Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

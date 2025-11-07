@@ -29,6 +29,9 @@ import { Spinner } from '@/components/ui/spinner';
 import { Label } from '@/components/ui/label';
 import { AlertCircle } from 'lucide-react';
 
+import LocationPickerDialogue from './locationPickerDialogue';
+import SmallMap from './smallMap';
+
 const reportSchema = z.object({
     title: z.string().min(5, 'Title must be at least 5 characters long'),
     description: z.string().min(20, 'Description must be at least 20 characters long'),
@@ -48,6 +51,8 @@ export default function ReportForm() {
     const [uploading, setUploading] = useState(false);
     const [images, setImages] = useState([]);
     const [imageIDs, setImageIDs] = useState([]);
+    const [location, setLocation] = useState(null);
+    const [editLocationOpen, setEditLocationOpen] = useState(false);
 
     const handleFileChange = async (e) => {
         const files = Array.from(e.target.files);
@@ -170,31 +175,43 @@ export default function ReportForm() {
                                 )}
                             </div>
                             <div className="grid gap-2">
-              <Label htmlFor="severity">Severity</Label>
-              <Controller
-                control={control}
-                name="severity"
-                render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger id="severity" className="w-full">
-                      <SelectValue placeholder="Select severity" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {severityOptions.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-              {errors.severity && (
-                <p className="text-sidebar-primary text-sm">
-                  {errors.severity.message}
-                </p>
-              )}
-            </div>
+                                <Label htmlFor="severity">Severity</Label>
+                                <Controller
+                                    control={control}
+                                    name="severity"
+                                    render={({ field }) => (
+                                        <Select onValueChange={field.onChange} value={field.value}>
+                                            <SelectTrigger id="severity" className="w-full">
+                                                <SelectValue placeholder="Select severity" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {severityOptions.map((option) => (
+                                                    <SelectItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    )}
+                                />
+                                {errors.severity && (
+                                    <p className="text-sidebar-primary text-sm">
+                                        {errors.severity.message}
+                                    </p>
+                                )}
+                            </div>
+                            {/* Location Picker Component */}
+                            {!location && <div className="grid gap-2 w-full">
+                                <Label htmlFor="location">Location</Label>
+                                <LocationPickerDialogue onSelect={(location) => setLocation(location)} openState={editLocationOpen} />
+                            </div>}
+                            {location && (<div className="grid gap-2 w-full">
+                                <Label>Selected Location</Label>
+                                <SmallMap latitude={location.lat} longitude={location.lon} markerText={location.display_name} />
+                                <p className="text-sm">{location.display_name}</p>
+                                {/* Small edit button to re-open location picker */}
+                                <Button variant="link" className="p-0 text-sm self-start" onClick={() => {setLocation(null); setEditLocationOpen(true);}}>Edit Location</Button>
+                            </div>)}
                         </CardContent>
                     </form>
                 <CardFooter>

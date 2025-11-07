@@ -35,7 +35,7 @@ export const authOptions = {
                     if (data.success) {
                         return {
                             id: data.user.id,
-                            name: data.user.name,
+                            name: data.user.username,
                             email: data.user.email,
                             token: data.token
                         };

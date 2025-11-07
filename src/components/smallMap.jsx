@@ -8,10 +8,10 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function SmallMap({ latitude, longitude, markerText }) {
-    const TORONTO_COORDINATES = [43.6532, -79.3832]
+    const coords = [latitude, longitude];
     return (
         <Map
-            center={TORONTO_COORDINATES}
+            center={coords}
             zoom={13}
             dragging={false}
             scrollWheelZoom={false}
@@ -23,6 +23,14 @@ export default function SmallMap({ latitude, longitude, markerText }) {
             attributionControl={false}
         >
             <MapTileLayer />
+            <MapMarker position={coords}>
+                {markerText && (
+                    <MapPopup>
+                        <span>{markerText}</span>
+                    </MapPopup>
+                )}
+            </MapMarker>
+            <MapZoomControl position="topright" />
         </Map>
     );
 }
