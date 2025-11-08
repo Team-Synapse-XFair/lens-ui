@@ -11,13 +11,14 @@ export async function POST(request) {
         return NextResponse.json({ message: 'Unauthorized', "success": false }, { status: 401 });
     }
 
-    const { title, description, severity, images } = body;
+    const { title, description, severity, images, location } = body;
 
     const payload = {
         "title": title,
         "description": description,
         "severity": severity,
-        "images": images
+        "images": images,
+        "location": location
     }
 
     const response = await axios.post(`${process.env.LENS_API_URL}/report`, payload, {

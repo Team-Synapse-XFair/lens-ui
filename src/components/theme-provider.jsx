@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import "react"
-import { ThemeProvider } from "next-themes"
+import 'react';
+import { ThemeProvider } from 'next-themes';
 
-export function NextThemeProvider({children, ...props}) {
-  return <ThemeProvider {...props}>{children}</ThemeProvider>
+export function NextThemeProvider({ children, ...props }) {
+	return <ThemeProvider {...props}>{children}</ThemeProvider>;
 }

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
-import { Form } from 'react-hook-form';
 
 const allowedExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -32,7 +31,6 @@ export async function POST(request) {
         return NextResponse.json({ success: false, message: 'File size exceeds the 5MB limit.' }, { status: 400 });
     }
 
-    // Make sure server finds request.files
     const data = new FormData();
     data.append('file', file, fileName);
 
